@@ -1,0 +1,28 @@
+---
+- name: Clean database
+  hosts: database
+  become: yes
+  tasks:
+    - name: Run docker compose with env vars
+      command: docker compose down
+      args:
+        chdir: /home/ubuntu
+
+- name: Setup backend
+  hosts: backend
+  become: yes
+  tasks:
+    - name: Run docker compose with env vars
+      command: docker compose down
+      args:
+        chdir: /home/ubuntu
+
+- name: Setup frontend
+  hosts: frontend
+  become: yes
+  tasks:
+    - name: Run docker compose with env vars
+      command: docker compose down
+      args:
+        chdir: /home/ubuntu
+

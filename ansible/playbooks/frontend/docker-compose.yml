@@ -1,0 +1,29 @@
+# Ironhack note - This file is for running in docker compose with prebuilt images
+# Use these if you're stuck, or if you want to start slowly migrating from external images into your own.
+
+services:
+  vote:
+    image: vijayagagla123/vote:latest
+    ports:
+      - "80:80"
+    environment:
+      REDIS_HOST: ${REDIS_HOST} 
+      REDIS_PORT: ${REDIS_PORT} 
+    networks:
+      - back-tier
+
+  result:
+    image: vijayagagla123/result:latest
+    ports:
+      - "81:80"
+    environment:
+      PG_HOST: ${PG_HOST} 
+      PG_PORT: ${PG_PORT} 
+      PG_USER: ${PG_USER} 
+      PG_PASSWORD: ${PG_PASSWORD} 
+      PG_DATABASE: ${PG_DATABASE} 
+    networks:
+      - back-tier
+
+networks:
+  back-tier:
